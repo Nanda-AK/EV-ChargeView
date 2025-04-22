@@ -1,0 +1,5 @@
+streamlit
+openai
+pandas
+matplotlib
+pandasai==1.6.0
