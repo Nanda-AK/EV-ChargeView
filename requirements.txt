@@ -1,5 +1,5 @@
 streamlit
 openai
 pandas
-matplotlib
+matplotlib==3.8.4
 pandasai==1.5.9
