@@ -19,13 +19,17 @@ st.sidebar.markdown("- Most reviewed station?")
 st.sidebar.markdown("- Average rating per vendor?")
 st.sidebar.markdown("- Show chart of vendor station count")
 
+if not os.path.exists("cleaned_ev_data.json"):
+    st.error("🚨 File 'cleaned_ev_data.json' is missing. Please upload it to the app folder.")
+    st.stop()
+
 # OpenAI Key from env or input
 if "OPENAI_API_KEY" not in st.session_state:
     st.session_state["OPENAI_API_KEY"] = st.sidebar.text_input("Enter OpenAI API Key", type="password")
 
 # Initialize SmartDataframe
 if st.session_state["OPENAI_API_KEY"]:
-    llm = OpenAI(api_token=st.session_state["OPENAI_API_KEY"])
+    llm = OpenAI(api_token=st.session_state["OPENAI_API_KEY"], model="gpt-4o")
     sdf = SmartDataframe(df, config={"llm": llm})
 else:
     st.warning("🔑 Please provide a valid OpenAI API key")
