@@ -58,7 +58,7 @@ if query:
             st.pyplot(response)"""
         #else:
             #st.write(response)
-            st.write(response)
+            #st.write(response)
     except Exception as e:
         st.error(f"❌ Error: {e}")
 
