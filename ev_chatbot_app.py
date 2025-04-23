@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from pandasai import SmartDataframe
 from pandasai.llm import OpenAI
 
@@ -52,10 +52,10 @@ if query:
         # Display response
         if isinstance(response, str):
             st.write(response)
-        elif hasattr(response, "figure"):
+        """elif hasattr(response, "figure"):
             st.pyplot(response.figure)
         elif isinstance(response, plt.Figure):
-            st.pyplot(response)
+            st.pyplot(response)"""
         else:
             st.write(response)
     except Exception as e:
