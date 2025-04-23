@@ -56,7 +56,8 @@ if query:
             st.pyplot(response.figure)
         elif isinstance(response, plt.Figure):
             st.pyplot(response)"""
-        else:
+        #else:
+            #st.write(response)
             st.write(response)
     except Exception as e:
         st.error(f"❌ Error: {e}")
