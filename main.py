@@ -9,7 +9,7 @@ from pandasai import SmartDataframe
 from pandasai.llm.openai import OpenAI
 
 # --- CONFIG ---
-openai.api_key = st.secrets["OPENAI_API_KEY"]  # Store key in Streamlit secrets
+openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
 llm = OpenAI(api_token=openai.api_key, model="gpt-4o")
 
 # --- LOAD JSON DATA ---
