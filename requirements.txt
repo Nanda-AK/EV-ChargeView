@@ -1,6 +1,9 @@
-streamlit
-pandas>=2.2.0
-openai
 python-dotenv
-matplotlib
 seaborn
+streamlit
+pandas==2.2.3
+pandasai
+dotenv
+openai
+matplotlib
+pyyaml
