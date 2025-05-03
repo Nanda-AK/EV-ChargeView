@@ -1,5 +1,6 @@
-streamlit==1.30.0
-pandas==1.5.3
-openai==1.13.3
-pandasai==2.2.0
-python-dotenv==1.0.1
+streamlit
+pandas>=2.2.0
+openai
+python-dotenv
+matplotlib
+seaborn
