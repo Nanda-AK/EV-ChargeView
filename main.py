@@ -10,7 +10,7 @@ from pandasai.llm.openai import OpenAI
 
 # --- CONFIG ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
-llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
+llm = OpenAI(api_token=openai.api_key, model="gpt-4o")
 
 # --- LOAD JSON DATA ---
 @st.cache_data
@@ -32,10 +32,10 @@ user_query = st.sidebar.text_input("Ad hoc Query (e.g., stations with long wait 
 
 # --- PREDEFINED FUNCTIONS ---
 def get_top_stations():
-    return raw_df.groupby('stationName')['reviewsCount'].sum().sort_values(ascending=False).head(10)
+    return raw_df.groupby('station_name')['reviewsCount'].sum().sort_values(ascending=False).head(10)
 
 def get_worst_stations():
-    return raw_df.groupby('stationName')['totalScore'].mean().sort_values().head(10)
+    return raw_df.groupby('station_name')['totalScore'].mean().sort_values().head(10)
 
 def average_rating_by_vendor():
     return raw_df.groupby('vendor')['totalScore'].mean().sort_values(ascending=False)
@@ -83,7 +83,7 @@ with col2:
     st.dataframe(wait_time_mentions())
 
     st.markdown("**Stations with 'Long Wait' in Reviews**")
-    st.dataframe(stations_with_long_wait()[['stationName', 'address']].drop_duplicates())
+    st.dataframe(stations_with_long_wait()[['station_name', 'address']].drop_duplicates())
 
 # --- USER QUERY TO GPT-4o ---
 if user_query:
