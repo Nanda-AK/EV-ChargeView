@@ -65,6 +65,9 @@ def peak_occupancy_analysis():
 st.subheader("📊 Key Insights")
 col1, col2 = st.columns(2)
 
+#Debug Line to pring all Columns 
+st.write("Columns available:", raw_df.columns.tolist())
+
 with col1:
     st.markdown("**Top 10 Stations by Review Volume**")
     st.dataframe(get_top_stations())
