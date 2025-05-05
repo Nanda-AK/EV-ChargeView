@@ -88,7 +88,7 @@ def refine_prompt(user_prompt):
     )
     
     response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",  # or gpt-3.5-turbo
+        model="gpt-3.5-turbo",  # or gpt-3.5-turbo
         messages=[
             {"role": "system", "content": system_msg},
             {"role": "user", "content": user_prompt}
