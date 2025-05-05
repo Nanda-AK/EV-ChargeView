@@ -81,16 +81,7 @@ with st.sidebar.form("user_query_form"):
     submitted = st.form_submit_button("Submit")
     if submitted:
         st.session_state.user_query = user_query
-🧠 How It Works
-selectbox: lets user pick from examples
 
-📋 Use this Example: sets the text area
-
-st.session_state.user_query: persists selected or typed input
-
-Let me know if you want to also clear the text area after submission or auto-trigger the query on selection.
-
-    
 # Refine User Prompt 
 client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"])
 def refine_prompt(user_prompt):
