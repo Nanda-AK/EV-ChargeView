@@ -6,12 +6,16 @@ import json
 import openai
 from datetime import datetime
 from pandasai import SmartDataframe
-from pandasai.llm.openai import OpenAI
-from openai import OpenAI
+#from pandasai.llm.openai import OpenAI
+#from openai import OpenAI
+
+from pandasai.llm.openai import OpenAI as PandasAIOpenAI
+from openai import OpenAI  # This is the official OpenAI SDK client
 
 # --- CONFIG ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
-llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
+#llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
+llm = PandasAIOpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
 #llm = OpenAI(api_token=openai.api_key, model="gpt-4o-mini")
 
 # --- LOAD JSON DATA ---
