@@ -49,6 +49,15 @@ st.title("🔌 EV Charging Station Review Explorer")
 st.sidebar.header("Ask a Question or Choose Analysis")
 user_query = st.sidebar.text_input("Ad hoc Query (e.g., stations with long wait time)")
 
+# --- USER QUERY TO GPT-4o ---
+if user_query:
+    st.subheader("🤖 LLM Answer")
+    try:
+        answer = df.chat(user_query)
+        st.write(answer)
+    except Exception as e:
+        st.error(f"Error: {e}")
+
 # --- PREDEFINED FUNCTIONS ---
 def get_top_stations():
     return raw_df.groupby('station_id')['reviewsCount'].sum().sort_values(ascending=False).head(10)
@@ -112,14 +121,6 @@ with col2:
     st.markdown("**Stations with 'Long Wait' in Reviews**")
     st.dataframe(stations_with_long_wait()[['station_id', 'address']].drop_duplicates())
 
-# --- USER QUERY TO GPT-4o ---
-if user_query:
-    st.subheader("🤖 LLM Answer")
-    try:
-        answer = df.chat(user_query)
-        st.write(answer)
-    except Exception as e:
-        st.error(f"Error: {e}")
 
 # --- BONUS INSIGHTS ---
 st.subheader("✨ Bonus LLM Insights")
