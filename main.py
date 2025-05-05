@@ -55,21 +55,21 @@ df = SmartDataframe(hashable_df, config={"llm": llm})
 st.title("🔌 EV Charging Station Review Explorer")
 
 # --- SIDEBAR INPUT ---
-# --- SIDEBAR INPUT FORM ---
-st.sidebar.header("Ask a Question or Choose Analysis?")
+# --- SIDEBAR INPUT ---
+st.sidebar.header("Ask a Question or Choose Analysis")
+
 with st.sidebar.form("user_query_form"):
-    # user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
-    user_query = st.text_area(
-        "User Query",
-        placeholder=(
-            "Examples:\n"
-            "- Show a list of vendors along with the total number of charging stations they have installed.\n"
-            "- Which electric vehicle charging station vendor has the highest number of stations in the dataset?\n"
-            "- Count the number of EV charging stations in the zip code 95110."
-        ),
-        height=100
-    )
+    user_query = st.text_area("User Query", placeholder="Type your query here...", height=100)
     submitted = st.form_submit_button("Submit")
+
+# --- Show sample prompts dropdown AFTER submit section ---
+with st.sidebar.expander("💡 See Example Prompts", expanded=False):
+    st.markdown("""
+    **Try these examples:**
+    - Show a list of vendors along with the total number of charging stations they have installed.
+    - Which electric vehicle charging station vendor has the highest number of stations in the dataset?
+    - Count the number of EV charging stations in the zip code 95110.
+    """)
     
 # Refine User Prompt 
 client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"])
