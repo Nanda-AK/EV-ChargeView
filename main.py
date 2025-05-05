@@ -54,7 +54,11 @@ user_query = st.sidebar.text_input("Ad hoc Query (e.g., stations with long wait 
 if user_query:
     st.subheader("🤖 LLM Answer")
     try:
-        answer = df.chat(user_query)
+        #answer = df.chat(user_query)
+        refined_prompt = refine_prompt(user_query)
+        st.markdown(f"🔍 **Refined Prompt**: `{refined_prompt}`")
+        answer = df.chat(refined_prompt)
+        
         st.markdown(
             f"""
             <div style="
@@ -74,7 +78,23 @@ if user_query:
         )
     except Exception as e:
         st.error(f"Error: {e}")
-
+        
+# Refine User Prompt 
+def refine_prompt(user_prompt):
+    system_msg = (
+        "You are an EV analytics expert. "
+        "Refine the user query to be precise and relevant for a dataframe analysis on electric vehicle charging station reviews. "
+        "If the prompt implies a chart or graph, ask for X and Y values. Avoid vague terms. Respond with only the refined query."
+    )
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4o-mini",  # or gpt-3.5-turbo
+        messages=[
+            {"role": "system", "content": system_msg},
+            {"role": "user", "content": user_prompt}
+        ]
+    )
+    return response['choices'][0]['message']['content'].strip()
 
 # --- PREDEFINED FUNCTIONS ---
 def get_top_stations():
