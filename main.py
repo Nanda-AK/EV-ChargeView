@@ -10,8 +10,8 @@ from pandasai.llm.openai import OpenAI
 
 # --- CONFIG ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
-#llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
-llm = OpenAI(api_token=openai.api_key, model="gpt-4o-mini")
+llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
+#llm = OpenAI(api_token=openai.api_key, model="gpt-4o-mini")
 
 # --- LOAD JSON DATA ---
 @st.cache_data
