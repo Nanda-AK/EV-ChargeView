@@ -52,9 +52,12 @@ st.set_page_config(page_title="EV Review Insights", layout="wide")
 st.title("🔌 EV Charging Station Review Explorer")
 
 # --- SIDEBAR INPUT ---
+# --- SIDEBAR INPUT FORM ---
 st.sidebar.header("Ask a Question or Choose Analysis")
-user_query = st.sidebar.text_input("Ad hoc Query (e.g., stations with long wait time)")
-
+with st.sidebar.form("user_query_form"):
+    user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
+    submitted = st.form_submit_button("Submit")
+    
 # Refine User Prompt 
 client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"])
 def refine_prompt(user_prompt):
