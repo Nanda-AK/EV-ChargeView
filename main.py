@@ -12,6 +12,9 @@ from pandasai import SmartDataframe
 from pandasai.llm.openai import OpenAI as PandasAIOpenAI
 from openai import OpenAI  # This is the official OpenAI SDK client
 
+# --- MUST BE FIRST STREAMLIT COMMAND ---
+st.set_page_config(page_title="EV Review Insights", layout="wide")
+
 # --- CONFIG ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
 #llm = OpenAI(api_token=openai.api_key, model="gpt-3.5-turbo")
@@ -48,7 +51,7 @@ for col in hashable_df.columns:
 df = SmartDataframe(hashable_df, config={"llm": llm})
 
 # --- APP LAYOUT ---
-st.set_page_config(page_title="EV Review Insights", layout="wide")
+#st.set_page_config(page_title="EV Review Insights", layout="wide")
 st.title("🔌 EV Charging Station Review Explorer")
 
 # --- SIDEBAR INPUT ---
