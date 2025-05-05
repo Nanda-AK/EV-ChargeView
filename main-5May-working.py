@@ -1,3 +1,4 @@
+# Predefine Function working, but user query fails with list issue. 
 # EV Review Streamlit App with GPT-4o and 10 Predefined Analysis Functions
 
 import streamlit as st
