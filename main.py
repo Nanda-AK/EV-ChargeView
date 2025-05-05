@@ -112,31 +112,28 @@ def peak_occupancy_analysis():
 
 # --- RENDER PREDEFINED INSIGHTS ---
 st.subheader("📊 Key Insights")
-col1, col2 = st.columns(2)
 
-with col1:
-    st.markdown("**Top 10 Stations by Review Volume**")
-    st.dataframe(get_top_stations())
+st.markdown("**Top 10 Stations by Review Volume**")
+st.dataframe(get_top_stations(), use_container_width=True)
 
-    st.markdown("**Worst 10 Stations by Avg Rating**")
-    st.dataframe(get_worst_stations())
+st.markdown("**Worst 10 Stations by Avg Rating**")
+st.dataframe(get_worst_stations(), use_container_width=True)
 
-    st.markdown("**Avg Rating by Vendor**")
-    st.dataframe(average_rating_by_vendor())
+st.markdown("**Avg Rating by Vendor**")
+st.dataframe(average_rating_by_vendor(), use_container_width=True)
 
-with col2:
-    st.markdown("**Review Distribution (1-star only)**")
-    dist_series = review_distribution()
-    if not dist_series.empty:
-        st.bar_chart(dist_series)
-    else:
-        st.info("No review distribution data available.")
+st.markdown("**Review Distribution (1-star only)**")
+dist_series = review_distribution()
+if not dist_series.empty:
+    st.bar_chart(dist_series)
+else:
+    st.info("No review distribution data available.")
 
-    st.markdown("**Mentions of Wait Time**")
-    st.dataframe(wait_time_mentions())
+st.markdown("**Mentions of Wait Time**")
+st.dataframe(wait_time_mentions(), use_container_width=True)
 
-    st.markdown("**Stations with 'Long Wait' in Reviews**")
-    st.dataframe(stations_with_long_wait()[['station_id', 'address']].drop_duplicates())
+st.markdown("**Stations with 'Long Wait' in Reviews**")
+st.dataframe(stations_with_long_wait()[['station_id', 'address']].drop_duplicates(), use_container_width=True)
 
 
 # --- BONUS INSIGHTS ---
