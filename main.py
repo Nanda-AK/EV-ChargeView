@@ -55,21 +55,41 @@ df = SmartDataframe(hashable_df, config={"llm": llm})
 st.title("🔌 EV Charging Station Review Explorer")
 
 # --- SIDEBAR INPUT ---
-# --- SIDEBAR INPUT ---
 st.sidebar.header("Ask a Question or Choose Analysis")
 
-with st.sidebar.form("user_query_form"):
-    user_query = st.text_area("User Query", placeholder="Type your query here...", height=100)
-    submitted = st.form_submit_button("Submit")
+# --- Define sample prompts ---
+sample_prompts = [
+    "Show a list of vendors along with the total number of charging stations they have installed.",
+    "Which electric vehicle charging station vendor has the highest number of stations in the dataset?",
+    "Count the number of EV charging stations in the zip code 95110."
+]
 
-# --- Show sample prompts dropdown AFTER submit section ---
-with st.sidebar.expander("💡 See Example Prompts", expanded=False):
-    st.markdown("""
-    **Try these examples:**
-    - Show a list of vendors along with the total number of charging stations they have installed.
-    - Which electric vehicle charging station vendor has the highest number of stations in the dataset?
-    - Count the number of EV charging stations in the zip code 95110.
-    """)
+# --- Select example to populate ---
+with st.sidebar.expander("💡 Select an Example Prompt", expanded=False):
+    selected_example = st.selectbox("Choose a sample prompt", [""] + sample_prompts, key="example_select")
+    if st.button("📋 Use this Example"):
+        st.session_state.user_query = selected_example
+
+# --- Form for user input ---
+with st.sidebar.form("user_query_form"):
+    user_query = st.text_area(
+        "User Query",
+        value=st.session_state.get("user_query", ""),
+        placeholder="Type your query here...",
+        height=100
+    )
+    submitted = st.form_submit_button("Submit")
+    if submitted:
+        st.session_state.user_query = user_query
+🧠 How It Works
+selectbox: lets user pick from examples
+
+📋 Use this Example: sets the text area
+
+st.session_state.user_query: persists selected or typed input
+
+Let me know if you want to also clear the text area after submission or auto-trigger the query on selection.
+
     
 # Refine User Prompt 
 client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"])
