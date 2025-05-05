@@ -53,7 +53,7 @@ st.title("🔌 EV Charging Station Review Explorer")
 
 # --- SIDEBAR INPUT ---
 # --- SIDEBAR INPUT FORM ---
-st.sidebar.header("Ask a Question or Choose Analysis")
+st.sidebar.header("Ask a Question or Choose Analysis?")
 with st.sidebar.form("user_query_form"):
     # user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
     user_query = st.text_area(
