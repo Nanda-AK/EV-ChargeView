@@ -54,7 +54,22 @@ if user_query:
     st.subheader("🤖 LLM Answer")
     try:
         answer = df.chat(user_query)
-        st.code(answer, language="markdown")  # Pretty boxed output
+        st.markdown(
+        f"""
+        <div style="
+            background-color: #f0f2f6;
+            border-left: 5px solid #0a84ff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        ">
+        {answer}
+        </div>
+        """,
+        unsafe_allow_html=True
+        )  # Pretty boxed output
     except Exception as e:
         st.error(f"Error: {e}")
 
