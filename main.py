@@ -21,7 +21,7 @@ def load_data(json_path):
 
 raw_df = load_data("cleaned_ev_data.json")
 
-# --- FILTER INCOMPLETE ROWS (do not drop entire row, just avoid them later) ---
+# --- FILTER INCOMPLETE RECORDS (no drops, just filter) ---
 raw_df = raw_df[
     raw_df['EV Vendor'].notna() &
     raw_df['address'].notna() &
@@ -54,7 +54,11 @@ def average_rating_by_vendor():
     return raw_df.groupby('EV Vendor')['totalScore'].mean().sort_values(ascending=False)
 
 def review_distribution():
-    return raw_df['reviewsDistribution.1'].value_counts().sort_index()
+    col_name = 'reviewsDistribution.1'
+    if col_name in raw_df.columns:
+        return raw_df[col_name].value_counts().sort_index()
+    else:
+        return pd.Series(dtype=int)
 
 def wait_time_mentions():
     return raw_df['reviews'].apply(lambda x: 'wait' in str(x).lower()).value_counts()
@@ -90,7 +94,11 @@ with col1:
 
 with col2:
     st.markdown("**Review Distribution (1-star only)**")
-    st.bar_chart(review_distribution())
+    dist_series = review_distribution()
+    if not dist_series.empty:
+        st.bar_chart(dist_series)
+    else:
+        st.info("No review distribution data available.")
 
     st.markdown("**Mentions of Wait Time**")
     st.dataframe(wait_time_mentions())
