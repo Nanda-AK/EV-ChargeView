@@ -55,21 +55,22 @@ if user_query:
     try:
         answer = df.chat(user_query)
         st.markdown(
-        f"""
-        <div style="
-            background-color: #f0f2f6;
-            border-left: 5px solid #0a84ff;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            font-family: monospace;
-            white-space: pre-wrap;
-        ">
-        {answer}
-        </div>
-        """,
-        unsafe_allow_html=True
-        )  # Pretty boxed output
+            f"""
+            <div style="
+                background-color: #f0f2f6;
+                border-left: 5px solid #0a84ff;
+                padding: 1rem;
+                margin: 1rem 0;
+                border-radius: 8px;
+                font-family: monospace;
+                white-space: pre-wrap;
+                color: #111111;
+            ">
+            {answer}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     except Exception as e:
         st.error(f"Error: {e}")
 
