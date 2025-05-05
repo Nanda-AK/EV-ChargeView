@@ -56,14 +56,15 @@ st.title("🔌 EV Charging Station Review Explorer")
 st.sidebar.header("Ask a Question or Choose Analysis")
 with st.sidebar.form("user_query_form"):
     #user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
-    user_query = st.text_input(
+    user_query = st.text_area(
         "Ad hoc Query",
         placeholder=(
-            "e.g.,\n"
+            "Examples:\n"
             "- Show a list of vendors along with the total number of charging stations they have installed.\n"
             "- Which electric vehicle charging station vendor has the highest number of stations in the dataset?\n"
             "- Count the number of EV charging stations in the zip code 95110."
-        )
+        ),
+        height=100
     )
     submitted = st.form_submit_button("Submit")
     
