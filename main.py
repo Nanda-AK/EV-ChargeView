@@ -54,9 +54,10 @@ if user_query:
     st.subheader("🤖 LLM Answer")
     try:
         answer = df.chat(user_query)
-        st.write(answer)
+        st.code(answer, language="markdown")  # Pretty boxed output
     except Exception as e:
         st.error(f"Error: {e}")
+
 
 # --- PREDEFINED FUNCTIONS ---
 def get_top_stations():
