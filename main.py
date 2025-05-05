@@ -21,6 +21,14 @@ def load_data(json_path):
 
 raw_df = load_data("cleaned_ev_data.json")
 
+# --- FILTER INCOMPLETE ROWS (do not drop entire row, just avoid them later) ---
+raw_df = raw_df[
+    raw_df['EV Vendor'].notna() &
+    raw_df['address'].notna() &
+    raw_df['reviewsCount'].notna() &
+    raw_df['totalScore'].notna()
+]
+
 # --- CREATE SYNTHETIC STATION ID ---
 raw_df['station_id'] = raw_df['EV Vendor'] + " - " + raw_df['address']
 
@@ -69,9 +77,6 @@ def peak_occupancy_analysis():
 # --- RENDER PREDEFINED INSIGHTS ---
 st.subheader("📊 Key Insights")
 col1, col2 = st.columns(2)
-
-# Debug: Show available columns
-st.write("Columns available:", raw_df.columns.tolist())
 
 with col1:
     st.markdown("**Top 10 Stations by Review Volume**")
