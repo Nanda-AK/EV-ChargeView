@@ -7,6 +7,7 @@ import openai
 from datetime import datetime
 from pandasai import SmartDataframe
 from pandasai.llm.openai import OpenAI
+from openai import OpenAI
 
 # --- CONFIG ---
 openai.api_key = st.secrets["OpenAI_API_KEY"]  # Store key in Streamlit secrets
@@ -51,21 +52,22 @@ st.sidebar.header("Ask a Question or Choose Analysis")
 user_query = st.sidebar.text_input("Ad hoc Query (e.g., stations with long wait time)")
 
 # Refine User Prompt 
+client = OpenAI(api_key=st.secrets["OpenAI_API_KEY"])
 def refine_prompt(user_prompt):
     system_msg = (
         "You are an EV analytics expert. "
         "Refine the user query to be precise and relevant for a dataframe analysis on electric vehicle charging station reviews. "
         "If the prompt implies a chart or graph, ask for X and Y values. Avoid vague terms. Respond with only the refined query."
     )
-    
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # or gpt-3.5-turbo
+
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": system_msg},
             {"role": "user", "content": user_prompt}
         ]
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message.content.strip()
 
 # --- USER QUERY TO GPT-4o ---
 if user_query:
