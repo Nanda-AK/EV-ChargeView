@@ -55,9 +55,9 @@ st.title("🔌 EV Charging Station Review Explorer")
 # --- SIDEBAR INPUT FORM ---
 st.sidebar.header("Ask a Question or Choose Analysis")
 with st.sidebar.form("user_query_form"):
-    #user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
+    # user_query = st.text_input("Ad hoc Query (e.g., stations with long wait time)")
     user_query = st.text_area(
-        "Ad hoc Query",
+        "User Query",
         placeholder=(
             "Examples:\n"
             "- Show a list of vendors along with the total number of charging stations they have installed.\n"
